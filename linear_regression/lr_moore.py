@@ -26,7 +26,7 @@ def main():
     regression(X, Ylog)
     
 def regression(X, Y):
-    # Compute intermediates values
+    # Compute intermediate values
     Ymean = Y.mean()
     Xmean = X.mean()
     Xsum = X.sum()
