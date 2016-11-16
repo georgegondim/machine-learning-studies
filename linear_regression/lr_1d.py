@@ -12,7 +12,7 @@ Ymean = Y.mean()
 Xmean = X.mean()
 Xsum = X.sum()
 Xsquared = X.dot(X)
-XYsum = X.dot(Y) 
+XYsum = X.dot(Y)
 denominator = Xsquared - Xmean*Xsum
 
 # Compute a and b from y = ax + b
@@ -30,3 +30,12 @@ plt.xlabel('X')
 plt.ylabel('Y')
 plt.legend()
 plt.show()
+
+# Compute Rsquared
+residues = Y - Ypred
+SSresidues = residues.dot(residues)
+deviations = Y - Ymean
+SSdeviations = deviations.dot(deviations)
+Rsquared = 1 - SSresidues / SSdeviations
+
+print 'Rsquared = ', Rsquared
