@@ -7,7 +7,7 @@ data = pd.read_csv('data_1d.csv').as_matrix()
 X = data[:, 0]
 Y = data[:, 1]
 
-# Compute intermediates values
+# Compute intermediate values
 Ymean = Y.mean()
 Xmean = X.mean()
 Xsum = X.sum()
