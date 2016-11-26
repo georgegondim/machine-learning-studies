@@ -31,7 +31,7 @@ def cross_entropy(T, pY):
 train_costs = []
 test_costs = []
 lr = 0.001
-for i in xrange(10000):
+for i in range(10000):
     pYtrain = forward(Xtrain, W)
     pYtest = forward(Xtest, W)
     ctrain = cross_entropy(Ytrain, pYtrain);
@@ -40,10 +40,10 @@ for i in xrange(10000):
     test_costs.append(ctest)
     W -= lr*Xtrain.T.dot(pYtrain - Ytrain)
     if i % 1000 == 0:
-        print "It: ", i, "Train: ", ctrain, "Test: ", ctest
+        print("It: ", i, "Train: ", ctrain, "Test: ", ctest)
     
-print "Train Accuracy", accuracy(Ytrain, pYtrain)
-print "Test Accuracy", accuracy(Ytest, pYtest)
+print ("Train Accuracy", accuracy(Ytrain, pYtrain))
+print ("Test Accuracy", accuracy(Ytest, pYtest))
 
 legend1, = plt.plot(train_costs, label='train cost')
 legend2, = plt.plot(test_costs, label='test cost')
