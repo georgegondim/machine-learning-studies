@@ -3,6 +3,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from sklearn.utils import shuffle
 from ecommerce_preprocess import load_binary_data
+from logistic_regression import logistic_regression
 
 X, Y = load_binary_data()
 X, Y = shuffle(X, Y)
@@ -49,4 +50,4 @@ legend1, = plt.plot(train_costs, label='train cost')
 legend2, = plt.plot(test_costs, label='test cost')
 plt.legend([legend1, legend2])
 plt.show()
-    
+logistic_regression(Xb, T, 5000, 0.0001, 0)    

@@ -2,6 +2,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 from math import ceil, floor
+from logistic_regression import logistic_regression
 
 N = 100
 D = 2
@@ -40,14 +41,4 @@ y_axis = -x_axis
 plt.plot(x_axis, y_axis)
 plt.show()
 
-lr = 0.01
-lmbda = 0.1
-for i in range(100):
-    w += -lr * Xb.T.dot(Y - T) - lmbda * w
-    Y = forward(Xb, w)
-    if i%10 == 0:
-        print("GD loss: ", cross_entropy(T, Y) + lmbda * w.T.dot(w))
-
-print('Final w: ', w.T)
-print('Final loss: ', cross_entropy(T, Y) + lmbda * w.T.dot(w))
-print('Final accuracy: ', accuracy(T, Y))
+logistic_regression(Xb, T, 5000, 0.0001, 0)
