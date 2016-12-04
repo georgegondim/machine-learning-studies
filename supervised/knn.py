@@ -1,6 +1,6 @@
 import numpy as np
 from scipy import stats
-from util import load_data
+from util import get_data_mnist
 import time
 
 class KNN(object):
@@ -26,7 +26,7 @@ class KNN(object):
 if __name__ == '__main__':
     limit = 2000
     N_train = int(0.5*limit)
-    X, Y = load_data(limit)
+    X, Y = get_data_mnist(limit)
     N, D = X.shape
     for k in (1,2,3,4,5):
         knn = KNN(k)
