@@ -140,9 +140,8 @@ def train_mnist():
         W1 = W1 - learning_rate * W1_grads
         W2 = W2 - learning_rate * W2_grads
 
-
-        print ("Epoch: %d - Elapsed time: %.4fs\n\tTraining Loss = %.4f, Training ACC = %.4f\n\tValidation Loss = %.4f, Validation ACC = %.4f"
-        % (i, time.time() - t0, hist_J[i], accuracy(outputs, Y_train), hist_J_val[i], accuracy(outputs_val, Y_val)))
+        print ("Epoch: %d - Elapsed time: %.4fs\n\tTraining Loss = %.4f, Training ACC = %.4f\n\tValidation Loss = %.4f, Validation ACC = %.4f\n\tGradient mean norm = %e"
+        % (i, time.time() - t0, hist_J[i], accuracy(outputs, Y_train), hist_J_val[i], accuracy(outputs_val, Y_val), (np.abs(W1_grads).sum() + np.abs(W2_grads).sum()) / (W1_grads.size + W2_grads.size)))
 
     plt.plot(hist_J, alpha=0.5, label='Training')
     plt.plot(hist_J_val, alpha=0.5, label='Validation')
