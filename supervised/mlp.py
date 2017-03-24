@@ -3,6 +3,7 @@ import matplotlib.pyplot as plt
 from scipy.stats import norm
 from util import get_data_mnist
 plt.style.use('ggplot')
+import time
 
 def sigmoid(z):
     return 1.0 / (1.0 + np.exp(-z))
@@ -132,14 +133,16 @@ def train_mnist():
     hist_J_val = np.zeros(niter)
     learning_rate = 0.7
     for i in range(niter):
+        t0 = time.time()
         outputs, hist_J[i], W1_grads, W2_grads = batch_iteration(W1, W2, X_train, Y_train, l2_coef)
         outputs_val, hist_J_val[i], _, _ = batch_iteration(W1, W2, X_val, Y_val, l2_coef)
 
-        print ("Epoch: %d:\n\tTraining Loss = %.4f, Training ACC = %.4f\n\tValidation Loss = %.4f, Validation ACC = %.4f"
-        % (i, hist_J[i], accuracy(outputs, Y_train), hist_J_val[i], accuracy(outputs_val, Y_val)))
-
         W1 = W1 - learning_rate * W1_grads
         W2 = W2 - learning_rate * W2_grads
+
+
+        print ("Epoch: %d - Elapsed time: %.4fs\n\tTraining Loss = %.4f, Training ACC = %.4f\n\tValidation Loss = %.4f, Validation ACC = %.4f"
+        % (i, time.time() - t0, hist_J[i], accuracy(outputs, Y_train), hist_J_val[i], accuracy(outputs_val, Y_val)))
 
     plt.plot(hist_J, alpha=0.5, label='Training')
     plt.plot(hist_J_val, alpha=0.5, label='Validation')
