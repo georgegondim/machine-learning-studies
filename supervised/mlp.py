@@ -128,10 +128,10 @@ def train_mnist():
     W1 = 0.3*np.random.randn(hidden_layer_size, input_layer_size + 1)
     W2 = 0.3*np.random.randn(output_layer_size, hidden_layer_size + 1)
 
-    niter = 2000
+    niter = 3000
     hist_J = np.zeros(niter)
     hist_J_val = np.zeros(niter)
-    learning_rate = 0.7
+    learning_rate = 1
     for i in range(niter):
         t0 = time.time()
         outputs, hist_J[i], W1_grads, W2_grads = batch_iteration(W1, W2, X_train, Y_train, l2_coef)
@@ -140,7 +140,7 @@ def train_mnist():
         W1 = W1 - learning_rate * W1_grads
         W2 = W2 - learning_rate * W2_grads
 
-        print ("Epoch: %d - Elapsed time: %.4fs\n\tTraining Loss = %.4f, Training ACC = %.4f\n\tValidation Loss = %.4f, Validation ACC = %.4f\n\tGradient mean norm = %e"
+        print ("Epoch: %d - Elapsed time: %.4fs\n\tTraining Loss = %.4f, Training ACC = %.4f\n\tValidation Loss = %.4f, Validation ACC = %.4f\n\tGradient mean absolute value = %e"
         % (i, time.time() - t0, hist_J[i], accuracy(outputs, Y_train), hist_J_val[i], accuracy(outputs_val, Y_val), (np.abs(W1_grads).sum() + np.abs(W2_grads).sum()) / (W1_grads.size + W2_grads.size)))
 
     plt.plot(hist_J, alpha=0.5, label='Training')
