@@ -119,7 +119,7 @@ def train_mnist():
     # Parameters
     print('Initializing model...')
     input_layer_size = X_train.shape[1]
-    hidden_layer_size = 50
+    hidden_layer_size = 100
     output_layer_size = 10
     l2_coef = 0.01
 
@@ -127,10 +127,10 @@ def train_mnist():
     W1 = 0.3*np.random.randn(hidden_layer_size, input_layer_size + 1)
     W2 = 0.3*np.random.randn(output_layer_size, hidden_layer_size + 1)
 
-    niter = 1000
+    niter = 2000
     hist_J = np.zeros(niter)
     hist_J_val = np.zeros(niter)
-    learning_rate = 0.5
+    learning_rate = 0.7
     for i in range(niter):
         outputs, hist_J[i], W1_grads, W2_grads = batch_iteration(W1, W2, X_train, Y_train, l2_coef)
         outputs_val, hist_J_val[i], _, _ = batch_iteration(W1, W2, X_val, Y_val, l2_coef)
@@ -141,9 +141,13 @@ def train_mnist():
         W1 = W1 - learning_rate * W1_grads
         W2 = W2 - learning_rate * W2_grads
 
-    plt.plot(hist_J, alpha=0.5)
+    plt.plot(hist_J, alpha=0.5, label='Training')
+    plt.plot(hist_J_val, alpha=0.5, label='Validation')
+    plt.title('Loss')
+    plt.xlabel('loss')
+    plt.ylabel('epoch')
+    plt.legend(loc='upper right')
     plt.show()
-
 
 if __name__ == '__main__':
     train_mnist()
