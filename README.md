@@ -1,2 +1,2 @@
-# ml_studies
-Machine Learning studies
+# machine-learning-studies
+My bumpy ride through the Machine Learning fields.
