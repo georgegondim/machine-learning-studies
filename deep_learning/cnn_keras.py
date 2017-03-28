@@ -39,7 +39,7 @@ y_train = keras.utils.to_categorical(y_train, num_classes)
 y_test = keras.utils.to_categorical(y_test, num_classes)
 
 # hold out validation data
-idx = int((5/6)*x_train.shape[0])
+idx = int((5 / 6) * x_train.shape[0])
 x_val = x_train[idx:, :, :, :]
 y_val = y_train[idx:, :]
 x_train = x_train[:idx, :, :, :]
@@ -53,15 +53,15 @@ print(x_test.shape[0], 'test samples')
 # model
 model = Sequential()
 model.add(Conv2D(filters=6,
-    kernel_size=(5, 5),
-    input_shape=input_shape,
-    data_format=K.image_data_format()))
+                 kernel_size=(5, 5),
+                 input_shape=input_shape,
+                 data_format=K.image_data_format()))
 model.add(Activation('relu'))
 model.add(MaxPooling2D(pool_size=(2, 2)))
 model.add(Dropout(0.5))
 model.add(Conv2D(filters=16,
-    kernel_size=(5, 5),
-    data_format=K.image_data_format()))
+                 kernel_size=(5, 5),
+                 data_format=K.image_data_format()))
 model.add(Activation('relu'))
 model.add(MaxPooling2D(pool_size=(2, 2)))
 model.add(Dropout(0.5))
@@ -72,11 +72,11 @@ model.add(Dense(10))
 model.add(Activation('softmax'))
 
 model.compile(loss='categorical_crossentropy',
-    optimizer='sgd',
-    metrics=['accuracy'])
+              optimizer='sgd',
+              metrics=['accuracy'])
 
 model.fit(x_train, y_train, batch_size=batch_size, epochs=epochs,
-    verbose=1, validation_data=(x_val, y_val))
+          verbose=1, validation_data=(x_val, y_val))
 
 score = model.evaluate(x_test, y_test, verbose=0)
 

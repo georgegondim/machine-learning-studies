@@ -28,7 +28,7 @@ y_train = keras.utils.to_categorical(y_train, num_classes)
 y_test = keras.utils.to_categorical(y_test, num_classes)
 
 # hold out validation data
-idx = int((5/6)*x_train.shape[0])
+idx = int((5 / 6) * x_train.shape[0])
 x_val = x_train[idx:, :, :, :]
 y_val = y_train[idx:, :]
 x_train = x_train[:idx, :, :, :]
@@ -37,14 +37,18 @@ y_train = y_train[:idx, :]
 
 # Model
 model = Sequential()
-model.add(Dense(units=1000, input_shape=(img_pixels,), kernel_initializer=keras.initializers.RandomNormal(mean=0.0, stddev=0.3, seed=None)))
+model.add(Dense(units=1000, input_shape=(img_pixels,),
+                kernel_initializer=keras.initializers.RandomNormal(mean=0.0,
+                                                                   stddev=0.3,
+                                                                   seed=None)))
 model.add(Activation('sigmoid'))
-model.add(Dense(units=10, kernel_initializer=keras.initializers.RandomNormal(mean=0.0, stddev=0.3, seed=None)))
+model.add(Dense(units=10, kernel_initializer=keras.initializers.RandomNormal(
+    mean=0.0, stddev=0.3, seed=None)))
 model.add(Activation('softmax'))
 
 model.compile(loss='categorical_crossentropy',
-    optimizer='sgd',
-    metrics=['accuracy'])
+              optimizer='sgd',
+              metrics=['accuracy'])
 
 model.fit(x_train, y_train, batch_size=batch_size, epochs=epochs,
           verbose=1, validation_data=(x_val, y_val))
