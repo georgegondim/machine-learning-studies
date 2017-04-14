@@ -1,3 +1,8 @@
+'''
+ Implemeting a similar model from the paper:
+    Yoshua Bengio, Réjean Ducharme, Pascal Vincent, and Christian Janvin. 2003. A neural probabilistic language model. J. Mach. Learn. Res. 3 (March 2003), 1137-1155.
+'''
+
 import keras
 from keras.models import Sequential
 from keras.layers import Dense, Embedding, Activation, Flatten, Reshape
