@@ -4,9 +4,9 @@ from keras.models import Sequential
 from keras.layers import Dense, Activation
 from keras import backend as K
 
-batch_size = 128
+batch_size = 200
 num_classes = 10
-epochs = 2000
+epochs = 200
 
 # input image dimensions
 img_rows, img_cols = 28, 28
@@ -29,11 +29,10 @@ y_test = keras.utils.to_categorical(y_test, num_classes)
 
 # hold out validation data
 idx = int((5 / 6) * x_train.shape[0])
-x_val = x_train[idx:, :, :, :]
+x_val = x_train[idx:, :]
 y_val = y_train[idx:, :]
-x_train = x_train[:idx, :, :, :]
+x_train = x_train[:idx, :]
 y_train = y_train[:idx, :]
-
 
 # Model
 model = Sequential()
