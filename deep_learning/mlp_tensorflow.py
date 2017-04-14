@@ -58,7 +58,7 @@ def inference(x):
     output_weights = tf.Variable(tf.random_normal(
         [output_size, hidden_size], stddev=0.3))
     output_bias = tf.Variable(tf.random_normal(
-        [output_size, 1], stddev=0.3), name='blah')
+        [output_size, 1], stddev=0.3))
 
     # Feedforward
     hidden_activations = tf.nn.sigmoid(
