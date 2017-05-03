@@ -103,8 +103,13 @@ def grad_check():
         else:
             W2_perturb[row, col] = 0
 
-    grads = np.concatenate([W1_grads.flatten(), W2_grads.flatten()], axis=0)
-    print("numgrads - grads = ", numgrad - grads)
+    grads = np.concatenate(
+        [W1_grads.flatten(), W2_grads.flatten()], axis=0).reshape(nparams, 1)
+    numgrad = numgrad.reshape(nparams, 1)
+    print('[numgrad, grad]')
+    print(np.concatenate([numgrad, grads], axis=1))
+    print('Relative difference=', np.linalg.norm(
+        numgrad - grads) / np.linalg.norm(numgrad + grads))
 
 
 def accuracy(output, labels):
@@ -172,5 +177,5 @@ def train_mnist():
 
 
 if __name__ == '__main__':
-    grad_check()
-    # train_mnist()
+    # grad_check()
+    train_mnist()
