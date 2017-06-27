@@ -158,7 +158,7 @@ class TwoLayerNet(object):
               learning_rate=1e-3, learning_rate_decay=0.95,
               reg=5e-6, num_iters=100,
               batch_size=200, verbose=False,
-              optimizer='sgd', mu=0.9, filename=None):
+              optimizer='sgd', mu=0.9, early_stop=False, filename=None):
         """
         Train this neural network using stochastic gradient descent.
 
@@ -270,7 +270,7 @@ class TwoLayerNet(object):
                         self.save_model(filename)
                 else:
                     count_stop += 1
-                    if count_stop == 5:
+                    if early_stop and count_stop == 5:
                         break
 
                 # Decay learning rate
