@@ -241,6 +241,7 @@ class FullyConnectedNet(object):
         # layer, etc.                                                              #
         ############################################################################
         caches = []
+        dropout_caches = []
         inpt = X
         for i in range(1, self.num_layers + 1):
             out, cache = affine_relu_forward(
@@ -248,6 +249,10 @@ class FullyConnectedNet(object):
                 self.params['W%d' % i],
                 self.params['b%d' % i])
             caches.append(cache)
+            if self.use_dropout:
+                out, cache = dropout_forward(out, self.dropout_param)
+                dropout_caches.append(cache)
+
             inpt = out
         scores = out
         ############################################################################
@@ -278,6 +283,8 @@ class FullyConnectedNet(object):
                 np.sum(self.params['W%d' % i] * self.params['W%d' % i])
 
         for i in reversed(range(1, len(caches) + 1)):
+            if self.use_dropout:
+                dout = dropout_backward(dout, dropout_caches[i - 1])
             dout, grads['W%d' % i], grads['b%d' % i] = affine_relu_backward(
                 dout, caches[i - 1])
             grads['W%d' % i] += self.reg * self.params['W%d' % i]
